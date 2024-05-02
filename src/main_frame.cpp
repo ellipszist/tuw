@@ -384,6 +384,15 @@ std::string MainFrame::GetCommand() {
 }
 
 void MainFrame::RunCommand() {
+    for (Component* comp : m_components) {
+        if (!comp->Validate()) {
+            std::string err_msg = comp->GetValidateError();
+            PrintFmt("[RunCommand] Error: %s\n", err_msg.c_str());
+            ShowErrorDialog(err_msg);
+            return;
+        }
+    }
+
     std::string cmd = GetCommand();
     PrintFmt("[RunCommand] Command: %s\n", cmd.c_str());
 

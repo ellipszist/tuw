@@ -3,6 +3,7 @@
 #include <vector>
 #include "rapidjson/document.h"
 #include "ui.h"
+#include "validator.h"
 
 // Base class for GUI components (file picker, combo box, etc.)
 class Component {
@@ -12,6 +13,7 @@ class Component {
     std::string m_id;
     bool m_has_string;
     bool m_is_wide;
+    Validator m_validator;
 
  private:
     bool m_add_quotes;
@@ -28,6 +30,9 @@ class Component {
 
     bool HasString() { return m_has_string; }
     bool IsWide() { return m_is_wide; }
+
+    bool Validate();
+    std::string GetValidateError();
 
     static Component* PutComponent(uiBox* box, const rapidjson::Value& j);
 };

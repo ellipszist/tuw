@@ -121,7 +121,8 @@ tuw_sources += [
     'src/json_utils.cpp',
     'src/env_utils.cpp',
     'src/exec.cpp',
-    'src/string_utils.cpp'
+    'src/string_utils.cpp',
+    'src/validator.cpp',
 ]
 
 if get_option('build_exe')

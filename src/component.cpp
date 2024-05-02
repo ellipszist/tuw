@@ -32,6 +32,7 @@ Component::Component(const rapidjson::Value& j) {
         m_id = "_" + std::to_string(hash);
     }
     m_add_quotes = json_utils::GetBool(j, "add_quotes", false);
+    m_validator.Initialize(j);
 }
 
 Component::~Component() {
@@ -46,6 +47,14 @@ std::string Component::GetString() {
 
 std::string const Component::GetID() {
     return m_id;
+}
+
+bool Component::Validate() {
+    return m_validator.Validate(GetRawString());
+}
+
+std::string Component::GetValidateError() {
+    return m_validator.GetError();
 }
 
 Component* Component::PutComponent(uiBox* box, const rapidjson::Value& j) {
